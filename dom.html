@@ -1,0 +1,86 @@
+<html>
+<head>
+    <title>DOM</title>
+    <style>
+        input[type] {
+            color:black;
+            margin: 5px;
+            box-shadow: 20px;
+            background-color: white;
+        }
+        body {
+            padding:70px;
+            div {
+            background-color: cadetblue;
+            margin :40px;
+            padding:40px;
+        }
+        } 
+        button[type]:hover {
+        background-color: gray;
+        transition: 1 sec;
+        margin-left:4px;
+        }   
+        header{
+            padding: 1px;
+            margin:2px;
+        }
+        h1{
+            color: chartreuse;
+        }
+        ul {
+            color:cyan;
+        }
+        </style>
+</head>
+<body>
+    <div>
+    <header id="header">
+        <center><h1 id="heading">TO DO LIST</h1></center>
+    </header>
+    <br>
+    <input type="text" id="taskinput" placeholder="enter a task" oninput="inputchange()">
+    <button id="addtaskbutton">add task</button>
+    <h2>Tasks</h2>
+    <ul class="tasklist" id="tasklist"></ul>
+    </div>
+
+    <script>
+        function inputchange() {
+            console.log("this is a javascript");
+        }
+
+        const taskinput = document.getElementById("taskinput");
+        const addtaskbutton = document.getElementById("addtaskbutton");
+        const tasklist = document.getElementById("tasklist");
+
+        addtaskbutton.addEventListener("click", () => {
+            const tasktext = taskinput.value.trim();
+
+            if (tasktext === "") {
+                alert("Please enter a task");
+                return;
+            }
+
+            const listitem = document.createElement("li");
+            listitem.textContent = tasktext;
+
+            // Create delete button
+            const deletebutton = document.createElement("button");
+            deletebutton.textContent = "Delete";
+            deletebutton.style.color = "red";
+
+            // Delete functionality
+            deletebutton.addEventListener("click", () => {
+                tasklist.removeChild(listitem);
+            });
+
+            listitem.appendChild(deletebutton);
+            tasklist.appendChild(listitem);
+
+            // Clear input
+            taskinput.value = "";
+        });
+    </script>
+</body>
+</html>
